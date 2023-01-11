@@ -1,0 +1,703 @@
+https://github.com/bkpark71/java
+https://github.com/castello/javajungsuk_basic
+
+1. 메서드 
+- stack이라는 곳에 sum이라는 함수가 쌓임
+- call by value 값이 넘어감 
+- 메소드는 클래스 영역 안에만 정의 가능 
+- long 타입은 3L 이렇게 넣어줘야 함 
+★스택★
+- LIFO(마지막에 들어온게 먼저 나감)
+
+- 기본형 매개변수, 참조형 매개변수가 올 수 있음 
+- 8개 기본형을 매개변수로 하는 메소드, 변수의 값을 읽기만 함
+- 참조형 매개변수는 변수의 값을 읽고 변경 가능 
+- static이 붙은 함수는 객체를 만들지 않고 사용 가능 
+
+=================================
+CallbyValue
+
+public class CallbyValue {
+
+  public static void main(String[] args) {
+
+    MyMath m = new MyMath();
+    long res1 = m.add(2L, 3L);
+    System.out.println(res1);
+
+  }
+}
+
+class MyMath {
+  long add(long a, long b) {
+    return a + b;
+  }
+
+  long sub(long a, long b) {
+    return a - b;
+  }
+
+  long mul(long a, long b) {
+    return a * b;
+  }
+
+  long div(long a, long b) {
+    return a / b;
+  }
+
+}
+=================================
+-> stack으로 어떻게 쌓이는지 확인하기 
+
+- 참조형 매개변수 
+-> 매개변수에 주소가 넘어감 
+www.javachobo.com
+
+*메소드 오버로딩
+- 같은 이름이지만 다른 일을 함 (매개변수의 개수가 다르거나, 타입이 다른것)
+
+2. 문자열
+=========================
+    String s1 = "hello java"; //같은 주소를 바라봄
+    String s2 = "hello java"; //같은 주소를 바라봄
+
+    //s1 -> 주소, s2->주소
+
+    System.out.println(s1==s2); //주소가 같음
+    System.out.println(s1.equals(s2)); //주소에 갔더니 string의 값이 같음
+
+
+    String s3 = new String("hello java");
+    String s4 = new String("hello java");
+
+    System.out.println(s1==s3); //달라,
+    System.out.println(s3==s4); //달라,
+
+    s1=s3;
+    System.out.println(s1==s3); // 같아
+===========================
+- 리터럴은 같은 주소 
+- compareTo -> -1,0,1리턴
+- equals -> true, false
+- 문자열 조작 : charAt, indexOf, isEmpty, length, toLowerCase, toUpperCase, trim, contains -> string 문자열을 바꾸지는 않는다 
+
+===========================
+public class String3Demo {
+
+  public static void main(String[] args) {
+    String s1 = "hello java";
+    String s2 = "hello java";
+    String s3 = new String("hello java");
+    String s4 = new String("hello java");
+
+    System.out.println(s1.toUpperCase());
+    System.out.println(s1);
+    System.out.println(s1.substring(3));
+    System.out.println(s1.substring(3,7));
+
+  }
+}
+===========================
+- 컴파일 에러
+- 런타임 에러 -> exception
+-> NullPointerException(이 세상에 존재하지 않는 객체에 isEmpty라고 묻는건 이치에 맞지 않음)
+
+*텍스트 블록 
+- 자바 15부터 추가된 기능 
+- """~"""
+
+2.배열
+- int[] scores = new int[5]; ---->훨 많이 씀 
+  int scores []  
+- 장점 : 배열 찾는게 빠름 
+- 단점 : 크기를 바꿀 수가 없음
+   -> temp를 만들어 놓고 옮겨야함 
+- 배열은 기본적으로 기본값으로 자동 초기화 됨 
+- 방법4의 오류는 scores는 주소인데 거기에 값을 넣으려고 하니까 오류가 발생
+
+===========================
+public class ArrayInit {
+  public static void main(String[] args) {
+    int[] scores = new int[5];//자동 초기화 됨
+    System.out.println(scores);
+    for (int i = 0; i < 5; i++) {
+      System.out.println(scores[i] + i); //score은 참조형 변수다. scores[i] primitive 변수다
+    }
+  }
+}
+===========================
+
+===========================
+
+public class ArrayInit {
+  public static void main(String[] args) {
+    int[] scores = new int[5];//자동 초기화 됨
+    System.out.println(scores);
+    for (int i = 0; i < 5; i++) {
+      System.out.println(scores[i] + i); //score은 참조형 변수다. scores[i] primitive 변수다
+    }
+
+    int[] s1 = {10, 20, 30, 40, 50}; //얘는 컴파일러가 new int를 넣어줌 , 얘만 기억하자
+    int[] s2 = new int[]{10, 20, 30, 40, 50};
+    //int[] s2 = new int[5]{10,20,30,40,50}// 이것도 안됨 ,중복으로 주는것이기 때문에
+    int[] s3;
+    s3 = new int[]{10, 20, 30, 40, 50};
+    // int[] s4 ;
+    //s4 = {10,20,30,40,50};//주소를 저장할 수 있는 참조변수인데 값을 넣으려고 하니까 오류
+
+    for (int e : s3) {
+      System.out.println("정수 요소 출력:" + e);
+    }
+
+    char[] c = {'a', 'b', 'c'};
+    System.out.println(c);  //abc
+    for (char e : c) {
+      System.out.println("문자 요소 출력:" + e);
+    }
+
+    String[] s = {"a", "b", "c"};
+    System.out.println(s);
+
+  }
+}
+
+===========================
+- char[] c = {'a','b','c'}; -> c는 주소가 아닌 abc가 출력 됨
+
+=============================
+import java.util.Arrays;
+
+public class MinMaxArray {
+  public static void main(String[] args) {
+    int[] array = {10, 20, 40,30};
+    int max = array[0];
+    int min = array[0];
+
+    for (int i = 0; i < array.length; i++) {
+      if(max<array[i]){
+        max = array[i];
+      }else if(min>array[i]){
+        min = array[i];
+      }
+    }
+    System.out.println("배열의 최댓값은 "+max+"입니다.");
+    System.out.println("배열의 최솟값은 "+min+"입니다.");
+
+    Arrays.sort(array);
+    System.out.println(Arrays.toString(array));
+
+  }
+}
+
+=============================
+- Edit configurations -> String[] args args에 값을 넣을수 있음 
+
+===============================
+Edit configurations  -> 안녕! 3
+public class ArgsArray {
+
+  public static void main(String[] args) {
+
+    System.out.println(args[0]);
+    System.out.println(Integer.parseInt(args[1]));
+    if (args.length > 0) {
+      for (int i = 0; i < Integer.parseInt(args[1]); i++) {
+        System.out.println(args[0]);
+      }
+    }
+
+  }
+}
+======================================
+- 가변 개수 인수
+ : JDK 5부터는 메서드에도 데이터 타입이 같은 가변 개수의 인수를 전달 가능 -> 오버로딩이랑 다름 
+======================================
+public class VarArgs {
+  public static void main(String[] args) {
+    printSum(1, 2, 3, 4, 5);
+    printSum(10, 20, 30);
+  }
+
+
+  //v가 배열로 됨 
+  public static void printSum(int... v) {
+    int sum = 0;
+    for (int num : v) {
+      sum += num;
+    }
+    System.out.println("전체 숫자의 합은 " + sum);
+  }
+
+}
+======================================
+
+4. 열거형
+- 관련된 상수들을 같이 묶어 놓은 것
+- Gender gender = 1; 이렇게 넣을수 없음
+- Gender gender =Gender.FEMAIL;
+
+5. 객체지향
+- 변수<함수<클래스
+- 절차지향 : c언어
+- 캡슐화, 상속, 추상화, 다형성
+- 클래스는 제품을 만들기 위한 설계도 
+- 설계도를 가지고 만들어진 눈에 보이는 어떤 제품은 객체(리모콘)
+- 진짜 찍어놓은 것 인스턴스
+- 객체와 인스턴스는 미묘하게 다름
+- 캡슐화 : 관련된 필드와 메서드를 하나의 캡슐처럼 포장해 세부 내용을 외부에서 알 수 없도록 감추는 것 
+             -> 숨겨놓은것, 가져오고 싶으면 메소드를 통해서 가져오기 setter,getter
+- 상속 : 하위 객체가 상위 객체의 매소드와 필드를 사용하는 것
+          개발 된 객체를 재사용하는 방법 중 하나 
+- 다형성 : move -> 새한테 적용될 때 fly가 되고, 사자는 run, 물고기는 swim이 됨 
+             동일한 명령을 내리더라도 객체의 종류에 따라 다르게 실행되는 프로그래밍 기법 
+- 추상화 : ???
+* 클래스 선언
+- 클래스 이름은 대문자
+- 필드와 매서드 
+- 필드도 클래스 변수와 인스턴스 변수로 나누어 짐
+- public은 접근 제한자 : 누구나 사용 가능 
+- static이 안붙은 메소드는 Ball라는 객체를 만든 후 호출 가능 함
+- 2개 이상의 클래스를 하나의 파일로 선언은 가능
+- 하나의 파일에 클래스가 둘 이상 있다면 하나만 public으로 선언할 수 있고, 해당 클래스 이름은 소스 파일 이름과 동일해야 함 
+- class 파일 2개 생성 됨 
+- 클래스 이름 변수 -> 참조 변수 
+- 변수 = new 클래스이름();-> 주소가 변수에 들어감  
+- primitive는 메모리에 직접 값을 입력함
+- 참조 변수는 주소가 저장 됨 
+- 클래스 만들어지자 마자 Object 클래스를 상속받아서 Object 관련 메소드를 사용 가능 
+- 지역변수는 초기화 해줘야 함  -> 클래스 전역변수는 클래스 전체에서 영향 있음. 초기화 안해도 됨 
+class Phone {
+  String name;
+  int value;
+
+  void print() {
+    System.out.println(value + "만원 짜리 " + name + " 스마트폰");
+  }
+
+
+}
+-> name, value 초기화 안해줘도 됨 클래스 전역변수임
+-> 자동으로 name은 null, value는 0으로 초기화 해줌 
+-> 그래도 nullPointerException이 나오지 않도록 String name = "" 초기화 해주는게 좋음 
+
+  void print() {
+    String name;
+    System.out.println(value + "만원 짜리 " + name + " 스마트폰");
+  }
+-> name은 지역변수이므로 초기화 해줘야함. String은 null, int는 0으로 초기화 
+
+===================================================
+
+class Phone {
+  String name;
+  int value;
+
+  void print() {
+    System.out.println(value + "만원 짜리 " + name + " 스마트폰");
+  }
+
+
+}
+
+public class PhoneDemo {
+
+  public static void main(String[] args) {
+    Phone p1 = new Phone();
+    System.out.println(p1.name);
+    System.out.println(p1.value);
+    p1.name = "갤럭시 S8";
+    p1.value = 100;
+    System.out.println(p1.name);
+    System.out.println(p1.value);
+    p1.print();
+
+    Phone p2 = new Phone();
+    p2.name = "G5";
+    p2.value = 85;
+    p2.print();
+  }
+
+}
+========================================================
+- 생성자란, 객체가 생성될 때 시행되는 초기작업 
+
+========================================================
+class Phone {
+  String name;
+  int value;
+
+  Phone(String n, int v) {
+    name = name;
+    value = value;
+  }
+
+  void print() {
+    System.out.println(value + "만원 짜리 " + name + " 스마트폰");
+  }
+
+}
+
+public class PhoneDemo {
+
+  public static void main(String[] args) {
+    Phone p1 = new Phone("갤럭시 S8", 100);
+    p1.print();
+
+    Phone p2 = new Phone("G5", 85);
+    p2.print();
+  }
+
+}
+========================================================
+- 자기 자신의 객체를 가리키는 것을 this
+
+
+========================================================
+class Phone {
+  String name;
+  int value;
+
+  Phone(String name, int value) {
+    this.name = name;  //this.name은 전역변수, name은 지역변수
+    this.value = value; //this.value은 전역변수, value은 지역변수
+    //모호한 상황을 피하기 위해서? name=name; 으로하면 프로그램은 잘모름
+  }
+
+  void print() {
+    System.out.println(value + "만원 짜리 " + name + " 스마트폰");
+  }
+
+}
+
+public class PhoneDemo {
+
+  public static void main(String[] args) {
+    Phone p1 = new Phone("갤럭시 S8", 100);
+    p1.print();
+
+    Phone p2 = new Phone("G5", 85);
+    p2.print();
+  }
+
+}
+========================================================
+- findArea(), this.findArea -> 자바에서는 변수도 객체고, 메소드도 객체 this.findArea -> 메소드에 괄호 안붙여줘도 됨 
+  괄호를 쓰는 순간 호출이 됨?
+- 클래스 내부에 캠슐화된 멤버를 외부에서 사용할 필요 
+- private으로 지정된 필드는 외부에서 접근이 불가능하며, 메소드를 통해서 바꿔야함 
+  값을 바꿀 때는 setter, 가져올때는 getter
+
+- 파일안에 class 두개 만들 때 public은 하나여야 함 
+
+===========================================
+public class GetSetDemo {
+  public static void main(String[] args) {
+    Circle c = new Circle();
+    //c.radius = 3; private로 하면 c.radius로 접근 못함
+    c.setRadius(30);
+    System.out.println(c.getRadius());
+    System.out.printf("%.2f", c.findArea());
+
+    c.setRadius(0);
+  }
+
+}
+
+class Circle {
+  private int radius;
+
+  public int getRadius() {
+    return radius;
+  }
+
+  public void setRadius(int radius) {
+    if (radius == 0) {
+      System.out.println("원의 반지름은 0보다 커야합니다.");
+    } else if (radius > 100) {
+      System.out.println("원의 반지름은 100보다 작아야합니다.");
+    } else {
+      this.radius = radius;
+    }
+
+  }
+
+  double findArea() {
+    return 3.14 * radius * radius;
+  }
+
+}
+===========================================
+- 생성자의 역할 : 객체를 생성하는 시점에서 필드를 다양하게 초기화 , 리턴 값 없음 
+- 생성자 생략을 해도 컴파일러가 자동으로 생성시켜 줌 
+- 생성자 이름은 클래스이름과 동일해야 함 
+- 메소드 처럼 생성자도 오버로딩 가능함 
+- 오버로딩이란, 메소드의 시그니처가 다른 여러개의 메소드를 만드는 것 
+- 메소드의 시그니처 : 메소드의 이름은 같은데, 매개변수의 개수가 다른거나, 순서가 다르거나, 데이터 타입이 다르거나,
+                           리턴 타입은 시그니처가 아님 
+- this와 this() -> this()는 기본 생성자를 불러오는 것 
+- this("빨강") -> this()는 맨 앞에 붙여줘야 함 
+
+===========================================
+public class Constructor {
+}
+
+
+class Circle2 {
+  String color = "";//nullpointerexception이 나오지 않도록 "" 웬만하면 하기
+  double radius = 10.0;
+
+  Circle2() {
+    this(10.0); //맨 앞에 넣어야 함
+    this.color = "blue";
+  }
+
+  Circle2(double radius) {
+    this.radius = radius;
+    this.color = "빨강";
+  }
+
+  Circle2(String color) {
+    this.radius = 5.0;
+    this.color = color;
+  }
+
+}
+
+===========================================
+
+===========================================
+public class Constructor {
+  public static void main(String[] args) {
+//    Circle2 c1 = new Circle2();//10.0, 파란
+//
+//    Circle2 c2 = new Circle2(3.0);//3.0 빨간색
+//
+//    Circle2 c3 = new Circle2("yellow"); //5.0 yellow
+//
+//    c1.color = "red";
+//    c2.color = "red";
+//    c3.color = "red";
+//
+//    c1.radius = 3.0;
+//    c2.radius = 3.0;
+//    c3.radius = 3.0;
+
+
+    //배열 만들기
+    Circle2[] c = new Circle2[5]; //그 객체를 가리키는 주소가 들어가게 됨
+    for (int i = 0; i < 3; i++) {
+      c[i] = new Circle2();
+      c[i].color = "red";
+      c[i].radius = 3.0;
+    }
+    for (int i = 0; i < c.length; i++) {
+      System.out.println(c[i]);
+      System.out.println(c[i].color);
+      System.out.println(c[i].radius);
+    }
+
+  }
+}
+
+
+class Circle2 {
+  String color = "";//nullpointerexception이 나오지 않도록 "" 웬만하면 하기
+  double radius = 10.0;
+
+  Circle2() {
+    this(10.0); //맨 앞에 넣어야 함
+    this.color = "파란";
+  }
+
+  Circle2(double radius) {
+    this.radius = radius;
+    this.color = "빨강";
+  }
+
+  Circle2(String color) {
+    this.radius = 5.0;
+    this.color = color;
+  }
+
+}
+
+
+
+===========================================
+
+
+*연속호출
+- person.setName("민국").setAge(21).sayHello(); -> setName()후 자기 자신 객체를 리턴함?
+===========================================
+public class MethodChain {
+  public static void main(String[] args) {
+    Person p = new Person();
+//    p.setAge(21);
+//    p.setName("민국");
+//    p.sayHello();
+    p.setAge(21).setName("민국").sayHello();
+    //set의 리턴을 void가 아니라 객체 자신으로 해야됨
+  }
+}
+
+class Person {
+
+  private String name = ""; // null이 되지 않도록
+  private int age;
+
+  public String getName() {
+    return name;
+  }
+
+  public Person setName(String name) {
+    this.name = name;
+    return this;
+  }
+
+  public int getAge() {
+    return age;
+  }
+
+  public Person setAge(int age) {
+    this.age = age;
+    return this;
+  }
+
+  public void sayHello() {
+    System.out.println("이름은" + name + "나이는" + age);
+  }
+
+}
+
+
+===========================================
+
+[자바의정석 참고]
+★선언위치에 따른 변수의 종류★
+- 인스턴스 변수
+-> 각 인스턴스의 개별적인 저장공간. 인스턴스마다 다른 값 저장가능
+-> 인스턴스를 생성할 때 생성되고, 참조변수가 없을 때 가비지컬렉터에 의해자동제거 됨
+
+클래스변수
+- 같은 클래스의 모든 인스턴스들이 공유하 변수
+- 인스턴스 생성없이 '클래스이름.클래스변수명'으로 접근 -> static
+- 클래스가 로딩될 때 성성되고 프로그램이 종료될 때 소멸
+
+지역변수
+- 매서드 내에 선언되며, 매서드의 종료와 함께 소멸
+- 조건문, 반복문의 블럭{} 내에 선언된 지역변수는 블럭을 벗어나면 소멸 
+
+인스턴스변수는 인스턴스가 생성될 때 마다 생성되므로 인스턴스마다 각긱 다른 값을 유지 할 수 있지만
+클래스변수는 모든 인스턴스가 하나의 저장공간을 공유하므로 데이터 공유함
+
+
+객체(인스턴스)는 heap영역에
+클래스는 method area에 
+함수는 call stack
+static 변수는 (클래스 변수)는 method area에 있음 
+
+FLASH에서 한번 직접 실행해보기 
+
+=================================
+public class CircleTest {
+
+  public static void main(String[] args) {
+    Circle3 c1 = new Circle3();
+    c1.setColor("빨강");
+    c1.setRadius(100.0);
+    c1.numberOfCircles = c1.numberOfCircles + 1;
+    //Circle3.numberOfCircles = Circle3.numberOfCircles + 1;
+    System.out.println("공의 색깔은 " + c1.getColor() + "이고,반지름은 " + c1.getRadius() + "입니다. 총 공의 개수는 " + c1.numberOfCircles + "개 입니다.");
+
+    Circle3 c2 = new Circle3();
+    c2.setColor("노랑");
+    c2.setRadius(50.0);
+    Circle3.numberOfCircles = Circle3.numberOfCircles + 1;
+    System.out.println("공의 색깔은 " + c2.getColor() + "이고,반지름은 " + c2.getRadius() + "입니다. 총 공의 개수는 " + Circle3.numberOfCircles + "개 입니다.");
+  }
+
+}
+
+class Circle3 {
+
+  private double radius;
+  private String color = "";
+  static int numberOfCircles = 0;
+
+  public double getRadius() {
+    return radius;
+  }
+
+  public void setRadius(double radius) {
+    this.radius = radius;
+  }
+
+  public String getColor() {
+    return color;
+  }
+
+  public void setColor(String color) {
+    this.color = color;
+  }
+
+
+}
+============================================
+비지니스 로직은 class 안에 
+
+public class CircleTest {
+
+  public static void main(String[] args) {
+    Circle3 c1 = new Circle3(100.0,"빨강");
+
+    System.out.println("공의 색깔은 " + c1.getColor() + "이고,반지름은 " + c1.getRadius() + "입니다. 총 공의 개수는 " + c1.numberOfCircles + "개 입니다.");
+
+    Circle3 c2 = new Circle3(50.0,"노랑");
+    System.out.println("공의 색깔은 " + c2.getColor() + "이고,반지름은 " + c2.getRadius() + "입니다. 총 공의 개수는 " + Circle3.numberOfCircles + "개 입니다.");
+  }
+
+}
+
+class Circle3 {
+
+  private double radius;
+  private String color = "";
+  static int numberOfCircles = 0;
+
+  Circle3(double radius, String color){
+    this.radius = radius;
+    this.color = color;
+    ++numberOfCircles;
+  }
+
+  public double getRadius() {
+    return radius;
+  }
+
+  public void setRadius(double radius) {
+    this.radius = radius;
+  }
+
+  public String getColor() {
+    return color;
+  }
+
+  public void setColor(String color) {
+    this.color = color;
+  }
+
+
+}
+
+============================================
+
+
+
+
+
+
+
+
+
+
+
