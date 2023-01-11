@@ -21,7 +21,7 @@ public class ExceptionTest {
 
       // ae.printStackTrace();
       System.out.println(ae.getMessage());
-
+//
     } catch (ArithmeticException ar) {
       System.out.println(ar.getMessage());
     } catch (NullPointerException an) {
