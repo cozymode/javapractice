@@ -15,10 +15,10 @@ public class Ball extends Circle {
 //  public void findArea() {
 //    System.out.println("부피는 4/3*(ㅠ*반지름*반지름*반지르)이다.");
 //  }
-
-  @Override
-  public void findArea(){
-    System.out.println("넓이는 4*(ㅠ*반지름*반지름)이다.");
-  }
+//
+//  @Override
+//  public void findArea(){
+//    System.out.println("넓이는 4*(ㅠ*반지름*반지름)이다.");
+//  }
 
 }
