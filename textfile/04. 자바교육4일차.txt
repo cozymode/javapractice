@@ -1,0 +1,156 @@
+04. 자바 교육 4일차
+
+*Wrapper Class
+- 자바는 기본타입의 값을 갖는 객체를 생성할 수 있음 
+- 주의 Integer, Character 
+- 소문자 변수는 리터럴 값을, 객체는 주소를 저장 
+- Boxing과 Unboxing 
+   -> Integer obj = 100; // 참조 타입으로 변수를 선언, 기본형 타입의 값을 넣으 수 있음 , 컴파일러가 자동으로 해줌 
+   -> int value = obj; 
+- 서로 같은 타입끼리는 
+
+*제네릭 타입
+- 제네릭 : 포괄적인(구체적인의 반대), 타입을 결정하지 않고 클래스를 설계
+- 필드선언할때 타입이 필요, 생성자의 매개변수 등에 타입이 들어감
+- 이러한 타입이 구체적이지 않고 포괄적인 타입으로 선언할 수 있음
+- 실제로 사용을 할 때는 구체적인 타입이 결정이 되어야 하지만 설계할때는 구체적 타입을 언급하지 않고
+  사용할 때 구체적인 타입을 결정함
+
+- 컴파일할 때 타입을 점검하기 때문에 실행 도중 발생할 오류 사전 방지
+- 불필요한 타입 변환이 없어 프로그램 성능 향상
+   -> 타입체크와 형변환을 생략할 수 있으므로 코드가 간견ㄹ해짐
+- 클래스, 인터페이스, 매서드를 정의할 때 타입을 변수로 사용
+- 제네릭 타입 예제를 컴파일하면?(성공), 실행하면?(ClassCastException 발생)
+- 제네릭 타입을 쓰면 컴파일단에서 오류 확인 가능 
+- 제네릭 타입 선언
+class 클래스이름 <타입매개변수>
+- 여러개 넣을 때 : public class 클래스명<A,B....)
+-                      public interface 인터페이스명
+- 생성 : 제네릭클래스 <적용할타입> 변수 = new 제네릭클래스<적용할타입>():
+- ArrayList<Integer> list = new ArrayList<Integer>(); : 뒤에 Integer은 수정 가능
+- T에는 기본형이 아닌 참조형만 가능
+
+- getter,setter alt+insert 단축키 
+- private는 getter,setter로 
+- Raw 타입 지원 
+
+- 제네릭 타입에 대한 범위 제한
+- 제네릭 메서드 : <타입매개변수> 반환타입 매서드이름
+- 정적 제네릭 타입 금지
+- 기초 타입을 제네릭 인수로 사용 불가
+
+[컬렉션 프레임워크]
+- 필요성 : 고정된 크기의 배열의 불편함, 유사한 객체를 여러 개 저장하고 조작해야 할 때가 빈번
+- 배열의 장점 + 연결리스트의 장점  -> ArrayList
+- Stack, Queue, Collection, ArrayList, LinkedList
+- LinkedList에는 싱글 링크드 리스트, 더블 링크드 리스트
+- 컬렉션 프레임워크는 인터페이스와 클래스로 구성
+- List:객체의 순서가 있고, 원소가 중복될 수 있음  -> ArrayList, Stack, Vector, LinkedList
+- Queue : 객체를 입력한 순서대로 저장하며, 원소가 중복될 수 있음
+- Set:객체의 순서가 없으며, 동일한 원소를중복할 수 없다.
+- add : 객체를 맨 끝에 추가
+- clear : 저장된 모든 객체를 제거
+- contains : 명시한 객체의 저장 여부를 조사
+- isEmpty:리스트가 비어 있는지 조사
+- iterator : iterator를 반환
+- remove : 명시한 첫번째 객체를 제거하고, 제거 여부를 반환
+- size : 저장된 전체 객체의 개수를 반환
+- toArray : 리스트를 배열로 반환
+- hasNext : 처음부터 끝까지 읽을때
+
+-ArrayList<String> list = new ArrayList<>(); 
+  -> head 첫번째가 어디야 ? 참조변수, next를 가리키는 참조변수와, value 라는 3개의 공간이 있음 
+- 노드에는 value와 next 주소 
+- head null, 다음꺼 null,value도 null
+- size 0으로 초기화 
+- 다람쥐 넣으면 처음 노드 value에 다람쥐 넣고 next에 null head가 노드 객체를 가리킴 size 하나 증가해
+- 개구리 넣으면 다람쥐 next가 개구리 노드를 가리킴  size 하나 증가해 
+
+-stack은 인덱스 1부터 시작 ★
+- peek : 스택의 최상위 원소를 제거하지 않고 엿본다
+- pop :최상위 원소를 반환하며, 스택에서 제거
+- push : 스택의 최상위에 원소를 추가한다
+- search : 주어진 원소의 인덱스 값을 반환한다
+
+*Map 인터페이스
+- 키와 값, 이렇게 쌓으로 구성된 객체를 저장하는 자료구조
+- 맵이 사용하는 키와 값도 모두 객체
+- 키는 중복되지 않고 하나의 값에만 매핑되어 있으므로 키가 있다면 대응하는 값을 얻을 수 있음
+- Map 객체에 같은 키로 중복 저장되지 않도록 하려면 Set 객체처럼 키로 사용할 클래스에 대한
+hashCode()와 equals() 매서드를 오버로딩해야 함
+- hashtable  -> 배열 -> 동일하면 링크드 리스트 
+- keySet() 
+
+[람다식과 함수형 인터페이스]
+*익명클래스
+- 클래스는 클래스인데 이름이 없는 클래스
+- Parent p = new Parent(); 로 끝내는데
+  Parent p = new Parent(){
+   객체 내용을 오버라이딩한 메서드 
+}
+- 함수(메서드)를 간단한 '식"으로 표현하는 방법
+int max (int a, int b)
+-> (a,b) -> a>b?a:b
+- 익명함수(이름이 없는 함수)
+int max (int a, int b){
+return a>b ? a:b;
+} 
+-> (int a, intb) -> {
+return a>b ? a:b
+}
+
+*람다식 작성하기
+- 메서드의 이름과 반환타입을 제거하고 '->'를 블록{}앞에 추가한다.
+- 반환값이 있는 경우, 식이나 값만 적고 return문 생략 가능(끝에 ';'안 붙임)
+ (int a, int b) -> a>b? a:b
+- 매개변수의 타입이 추론 가능하면 생략가능(대부분의 경우 생략가능)
+(a,b) -> a>b?a:b
+- 매개 변수가 하나인 경우, 괄호() 생략가능(타입이 없을 때만)
+   a->a*a
+-블록 안의 문장이 하나뿐 일 경우, 괄호{}생략가능(끝에 ';' 안붙임)
+- (int i) -> System.outprintln(i);
+- 하나뿐인 문장이 return문이이면 괄호{} 생략불가
+
+람다식으로 변경하기
+
+*스레드
+- 하나의 실행 흐름으로 프로세스 내부에 존재 
+======================================
+package pack11;
+
+public class ThreadDemo {
+
+  public static void main(String[] args) {
+    Thread t = new Thread(new MyRunnable());
+    t.start();
+
+    for (int i = 0; i < 5; i++) {
+
+      System.out.println(Thread.currentThread() + "안녕");
+      try {
+        Thread.sleep(500);
+      } catch (InterruptedException e) {
+
+      }
+
+    }
+  }
+
+}
+
+class MyRunnable implements Runnable {
+  @Override
+  public void run() {
+    for (int i = 0; i < 5; i++) {
+      System.out.println(Thread.currentThread() + "잘가");
+      try {
+        Thread.sleep(500);
+      } catch (InterruptedException e) {
+
+      }
+
+    }
+  }
+}
+=========================================
+
