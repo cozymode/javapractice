@@ -95,7 +95,7 @@ public class Student implements Comparable<Student> {
 
   @Override
   public int compareTo(Student o) {
-    System.out.println("test");
+
     if (Integer.parseInt(this.toString()) < Integer.parseInt(o.toString())) {
       return 1;
     } else if (Integer.parseInt(this.toString()) == Integer.parseInt(o.toString())) {
